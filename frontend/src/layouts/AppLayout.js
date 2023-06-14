@@ -22,7 +22,6 @@ const AppLayout = () => {
                     setIsHideSideBar={setIsHideSideBar}
                 />
                 <div className="flex-grow-0 bg-[#F1F5F9] h-[calc(100vh-76px)] w-[calc(100vw -300px)] overflow-x-hidden p-7 overflow-y-scroll">
-                    {/* <BreadCrumb pathname={pathname} /> */}
                     <Outlet />
                 </div>
             </div>
