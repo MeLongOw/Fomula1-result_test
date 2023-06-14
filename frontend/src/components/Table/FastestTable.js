@@ -4,9 +4,9 @@ import dataDHL from "../../data/dataDHL.json";
 import CustomSelect from "../CustomSelect";
 
 const defaultSearchOptions = [
-    { value: "grandPrix", label: "grandPrix" },
-    { value: "driver", label: "Driver" },
-    { value: "car", label: "Car" },
+    { value: "grandPrix", label: "GRAND PRIX" },
+    { value: "driver", label: "DRIVER" },
+    { value: "car", label: "CAR" },
 ];
 
 export default function FastestTable() {
@@ -26,7 +26,16 @@ export default function FastestTable() {
         setSearchPayload(obj);
     };
 
-    const handleRefresh = () => {};
+    const handleRefresh = () => {
+        if (yearSelected?.value !== "all") {
+            setData([
+                dataDHL.find((el) => el?.year === yearSelected?.value),
+            ]);
+        } else {
+            setData([...dataDHL]);
+        }
+        return true;
+    };
 
     useEffect(() => {
         setYears((prev) => [

@@ -12,7 +12,7 @@ import {
     Legend,
     ResponsiveContainer,
 } from "recharts";
-const defaultSearchOptions = [{ value: "team", label: "Team" }];
+const defaultSearchOptions = [{ value: "team", label: "TEAM" }];
 
 export default function TeamsTable() {
     const [data, setData] = useState([]);
@@ -33,7 +33,14 @@ export default function TeamsTable() {
         setSearchPayload(obj);
     };
 
-    const handleRefresh = () => {};
+    const handleRefresh = () => {
+        if (yearSelected?.value !== "all") {
+            setData([dataTeams.find((el) => el?.year === yearSelected?.value)]);
+        } else {
+            setData([...dataTeams]);
+        }
+        return true;
+    };
 
     useEffect(() => {
         setYears((prev) => [
@@ -100,7 +107,7 @@ export default function TeamsTable() {
                             className="border ml-4 px-3 bg-white rounded-md hover:border-gray-400"
                             onClick={() => setIsViewChart(!isViewChart)}
                         >
-                            {!isViewChart ? "View as chart" : "Table as table"}
+                            {!isViewChart ? "View as chart" : "View as table"}
                         </button>
                     </div>
                 )}
@@ -209,7 +216,6 @@ export default function TeamsTable() {
                                             <div>
                                                 {`Team: ${payload?.team}`}
                                             </div>
-                                            
                                         </div>,
                                     ];
                                 }}

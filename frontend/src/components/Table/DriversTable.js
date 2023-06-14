@@ -38,7 +38,16 @@ export default function DriversTable() {
         setSearchPayload(obj);
     };
 
-    const handleRefresh = () => {};
+    const handleRefresh = () => {
+        if (yearSelected?.value !== "all") {
+            setData([
+                dataDrivers.find((el) => el?.year === yearSelected?.value),
+            ]);
+        } else {
+            setData([...dataDrivers]);
+        }
+        return true;
+    };
 
     useEffect(() => {
         setYears((prev) => [
@@ -51,6 +60,7 @@ export default function DriversTable() {
         if (yearSelected !== "all")
             setDataChart(data[0]?.data.map((el) => ({ ...el, pts: +el?.pts })));
     }, [data, yearSelected]);
+
     useEffect(() => {
         if (searchPayload) {
             const key = Object.keys(searchPayload);
@@ -104,7 +114,7 @@ export default function DriversTable() {
                             className="border ml-4 px-3 bg-white rounded-md hover:border-gray-400"
                             onClick={() => setIsViewChart(!isViewChart)}
                         >
-                            {!isViewChart ? "View as chart" : "Table as table"}
+                            {!isViewChart ? "View as chart" : "View as table"}
                         </button>
                     </div>
                 )}

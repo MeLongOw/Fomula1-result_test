@@ -4,9 +4,9 @@ import dataRaces from "../../data/dataRaces.json";
 import CustomSelect from "../CustomSelect";
 
 const defaultSearchOptions = [
-    { value: "winner", label: "Winner" },
-    { value: "grandPrix", label: "grandPrix" },
-    { value: "car", label: "Car" },
+    { value: "winner", label: "WINNER" },
+    { value: "grandPrix", label: "GRAND GRIX" },
+    { value: "car", label: "CAR" },
 ];
 
 export default function RacesTable() {
@@ -26,7 +26,14 @@ export default function RacesTable() {
         setSearchPayload(obj);
     };
 
-    const handleRefresh = () => {};
+    const handleRefresh = () => {
+        if (yearSelected?.value !== "all") {
+            setData([dataRaces.find((el) => el?.year === yearSelected?.value)]);
+        } else {
+            setData([...dataRaces]);
+        }
+        return true;
+    };
 
     useEffect(() => {
         setYears((prev) => [
@@ -67,8 +74,6 @@ export default function RacesTable() {
             }
         }
     }, [searchPayload, yearSelected, years]);
-
-
 
     return (
         <div className="relative">
